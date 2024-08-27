@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import QRCodeCanvas from "qrcode.react";
 
@@ -9,6 +9,30 @@ function App() {
   const [bgColor, setBgColor] = useState("");
   const [fgColor, setFgColor] = useState("");
   const [sizeQr, setSizeQr] = useState("");
+  const [minSize, setMinSize] = useState(200);
+  const [maxSize, setMaxSize] = useState(300);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMinSize(50);
+        setMaxSize(120);
+      } else if (window.innerWidth < 480) {
+        setMinSize(50);
+        setMaxSize(100);
+      } else {
+        setMinSize(100);
+        setMaxSize(300);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -55,7 +79,8 @@ function App() {
           <div>
             <label>Escolha o tamanho </label>
                 <input
-                  min="200" max="300"
+                  min={minSize}
+                  max={maxSize}
                   type="range" 
                   value={sizeQr}
                   onChange={(e) => setSizeQr(e.target.value)}
