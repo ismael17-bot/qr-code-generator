@@ -1,6 +1,8 @@
 ## Gerador de QR Code
 
 
+### https://generatorsimple-qrcode.netlify.app/
+
  ![image](https://github.com/user-attachments/assets/41b018c8-18ed-46f8-b357-ab99ded4c9db)
 
 ### Descrição
